@@ -23,9 +23,9 @@ const ContactForm = () => {
     setIsLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData
-      });
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert([formData]);
 
       if (error) throw error;
 
