@@ -25,12 +25,12 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <ExpertiseAreas />
         <About />
+        <ExpertiseAreas />
         <Portfolio />
-        <Newsletter />
-        <BookingSystem />
         <ContactForm />
+        <BookingSystem />
+        <Newsletter />
       </main>
       <Footer />
       <PremiumChat user={user} />
