@@ -18,17 +18,17 @@ const Footer = () => {
 
   const quickLinks = [
     { href: "#about", label: "About" },
-    { href: "#expertise", label: "Expertise" },
-    { href: "#portfolio", label: "Portfolio" },
+    { href: "#expertise", label: "Services" },
+    { href: "#pricing", label: "Pricing" },
     { href: "#newsletter", label: "Newsletter" },
     { href: "#booking", label: "Book Consultation" }
   ];
 
   const consultationTypes = [
-    { href: "#booking", label: "Supply Chain Consulting" },
-    { href: "#booking", label: "Technology Solutions" },
-    { href: "#booking", label: "Marketing & Design" },
-    { href: "#booking", label: "Professional Networking" }
+    { href: "#booking", label: "Custom Software Development" },
+    { href: "#booking", label: "IT Infrastructure & Support" },
+    { href: "#booking", label: "Workflow Automation & AI" },
+    { href: "#booking", label: "Free Consultation" }
   ];
 
   const socialLinks = [
@@ -77,14 +77,14 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="font-bold text-lg gradient-text">Jeremy Williams</h3>
-                <p className="text-sm text-muted-foreground">Supply Chain & Tech Innovator</p>
+                <p className="text-sm text-muted-foreground">IT Solutions for Small Businesses</p>
               </div>
             </div>
             
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Transforming businesses through strategic supply chain optimization, 
-              cutting-edge technology solutions, and innovative brand development. 
-              15+ years of expertise driving operational excellence and growth.
+              Budget-friendly IT solutions for small and medium businesses. Creative problem-solving,
+              open source expertise, and flexible pricing models. 100% satisfaction guarantee with
+              free trial work available.
             </p>
 
             {/* Contact Info */}

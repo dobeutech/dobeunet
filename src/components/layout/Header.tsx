@@ -72,10 +72,10 @@ const Header = () => {
 
   const navItems = [
     { id: "about", label: "About", ariaLabel: "Learn about Dobeu Tech Solutions" },
-    { id: "expertise", label: "Services", ariaLabel: "View our technology services" },
-    { id: "portfolio", label: "Portfolio", ariaLabel: "See our project portfolio" },
+    { id: "expertise", label: "Services", ariaLabel: "View our IT services" },
+    { id: "pricing", label: "Pricing", ariaLabel: "See our flexible pricing models" },
     { id: "contact", label: "Contact", ariaLabel: "Contact us for inquiries" },
-    { id: "booking", label: "Book Consultation", ariaLabel: "Schedule a consultation", isPrimary: true },
+    { id: "booking", label: "Book Consultation", ariaLabel: "Schedule a free consultation", isPrimary: true },
   ];
 
   const sectionIds = navItems.map(item => item.id);

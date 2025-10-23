@@ -4,9 +4,10 @@ import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import ExpertiseAreas from "@/components/sections/ExpertiseAreas";
 import About from "@/components/sections/About";
-import Portfolio from "@/components/sections/Portfolio";
 import Newsletter from "@/components/sections/Newsletter";
 import BookingSystem from "@/components/sections/BookingSystem";
+import PricingModels from "@/components/sections/PricingModels";
+import ValuePropositions from "@/components/sections/ValuePropositions";
 import ContactForm from "@/components/ContactForm";
 import PremiumChat from "@/components/PremiumChat";
 import { useAnalytics } from "@/hooks/useAnalytics";
@@ -26,10 +27,11 @@ const Index = () => {
       <main>
         <Hero />
         <About />
+        <ValuePropositions />
         <ExpertiseAreas />
-        <Portfolio />
-        <ContactForm />
+        <PricingModels />
         <BookingSystem />
+        <ContactForm />
         <Newsletter />
       </main>
       <Footer />
