@@ -1,15 +1,11 @@
 import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-  Truck, 
-  Code, 
-  Palette, 
-  ArrowRight, 
-  BarChart3, 
-  Cpu, 
-  Megaphone,
-  CheckCircle 
+import {
+  Truck,
+  Code,
+  Palette,
+  ArrowRight,
+  CheckCircle
 } from "lucide-react";
 
 const ExpertiseAreas = () => {
@@ -20,13 +16,13 @@ const ExpertiseAreas = () => {
       description: "15+ years of industry expertise across transportation, logistics, and operations",
       features: [
         "Freight optimization & KPI management",
-        "ELD compliance & fleet management", 
+        "ELD compliance & fleet management",
         "SOPs & team leadership",
         "Six Sigma Green Belt certified",
         "Masters in Integrated Supply Chain Management"
       ],
-      accent: "from-blue-500 to-cyan-500",
-      bgAccent: "bg-blue-50 dark:bg-blue-950/20"
+      gradient: "from-primary via-cyan-400 to-primary",
+      iconBg: "from-primary to-cyan-400"
     },
     {
       icon: Code,
@@ -39,8 +35,8 @@ const ExpertiseAreas = () => {
         "Linux VPS management (Debian/Ubuntu)",
         "Open source software solutions"
       ],
-      accent: "from-green-500 to-emerald-500",
-      bgAccent: "bg-green-50 dark:bg-green-950/20"
+      gradient: "from-cyan-400 via-blue-500 to-cyan-400",
+      iconBg: "from-cyan-400 to-blue-500"
     },
     {
       icon: Palette,
@@ -53,8 +49,8 @@ const ExpertiseAreas = () => {
         "Go-to-market strategy development",
         "Brand identity & positioning"
       ],
-      accent: "from-purple-500 to-pink-500", 
-      bgAccent: "bg-purple-50 dark:bg-purple-950/20"
+      gradient: "from-blue-500 via-primary to-blue-500",
+      iconBg: "from-blue-500 to-primary"
     }
   ];
 
@@ -62,35 +58,73 @@ const ExpertiseAreas = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.15
       }
     }
   };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 40 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.6 }
+      transition: { duration: 0.6, ease: "easeOut" }
     }
   };
 
   return (
-    <section id="expertise" className="py-24 bg-accent/5">
-      <div className="container-max section-padding">
+    <section id="expertise" className="py-32 bg-gradient-to-b from-background via-muted/30 to-background relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <motion.div
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary blur-3xl"
+        />
+        <motion.div
+          animate={{
+            rotate: [360, 0],
+            scale: [1.1, 1, 1.1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-cyan-400 blur-3xl"
+        />
+      </div>
+
+      <div className="container-max section-padding relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            <span className="gradient-text">Three Core Areas</span> of Expertise
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="inline-block glass-subtle px-6 py-2 rounded-full mb-6"
+          >
+            <span className="text-sm font-semibold text-primary">Core Services</span>
+          </motion.div>
+
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            <span className="gradient-text">Three Areas</span> of Expertise
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Leveraging diverse industry experience to drive innovation across supply chain, 
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Leveraging diverse industry experience to drive innovation across supply chain,
             technology, and marketing domains.
           </p>
         </motion.div>
@@ -100,45 +134,66 @@ const ExpertiseAreas = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16"
         >
           {expertiseAreas.map((area, index) => {
             const IconComponent = area.icon;
             return (
-              <motion.div key={area.title} variants={cardVariants}>
-                <Card className="h-full group hover:shadow-xl transition-all duration-500 border-0 bg-card/50 backdrop-blur-sm">
-                  <CardHeader className="text-center pb-6">
-                    <div className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${area.accent} p-4 mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <IconComponent className="w-full h-full text-white" />
-                    </div>
-                    <CardTitle className="text-2xl font-bold">{area.title}</CardTitle>
-                    <CardDescription className="text-base">
-                      {area.description}
-                    </CardDescription>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-4">
-                    <div className="space-y-3">
-                      {area.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-start gap-3">
-                          <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-sm text-muted-foreground">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <Button 
-                      variant="ghost" 
-                      className="w-full group/btn mt-6"
-                      asChild
+              <motion.div
+                key={area.title}
+                variants={cardVariants}
+                className="group"
+              >
+                <div className="glass-card rounded-3xl p-8 h-full flex flex-col relative overflow-hidden">
+                  {/* Gradient border effect on hover */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${area.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`} />
+
+                  {/* Icon and Header */}
+                  <div className="text-center mb-6 relative z-10">
+                    <motion.div
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                      className={`w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br ${area.iconBg} p-5 mb-6 shadow-lg`}
                     >
-                      <a href="#booking">
-                        Consult on {area.title}
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </a>
-                    </Button>
-                  </CardContent>
-                </Card>
+                      <IconComponent className="w-full h-full text-white" />
+                    </motion.div>
+                    <h3 className="text-2xl font-bold text-foreground mb-3">{area.title}</h3>
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                      {area.description}
+                    </p>
+                  </div>
+
+                  {/* Features List */}
+                  <div className="space-y-4 mb-8 flex-grow relative z-10">
+                    {area.features.map((feature, featureIndex) => (
+                      <motion.div
+                        key={featureIndex}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: featureIndex * 0.05 }}
+                        viewport={{ once: true }}
+                        className="flex items-start gap-3 group/item"
+                      >
+                        <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0 group-hover/item:scale-110 transition-transform duration-300" />
+                        <span className="text-sm text-muted-foreground group-hover/item:text-foreground transition-colors duration-300">
+                          {feature}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <Button
+                    variant="ghost"
+                    className="w-full group/btn mt-auto relative z-10 glass-subtle hover:glass border border-border/50 hover:border-primary/30"
+                    asChild
+                  >
+                    <a href="#booking" className="flex items-center justify-center">
+                      Consult on {area.title}
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                    </a>
+                  </Button>
+                </div>
               </motion.div>
             );
           })}
@@ -148,16 +203,24 @@ const ExpertiseAreas = () => {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center glass-card rounded-3xl p-12 max-w-4xl mx-auto"
         >
-          <p className="text-lg text-muted-foreground mb-6">
-            Ready to transform your business with integrated solutions?
+          <h3 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+            Ready to transform your business?
+          </h3>
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
+            Let's discuss how integrated solutions across supply chain, technology,
+            and marketing can drive your success.
           </p>
-          <Button size="lg" className="text-lg px-8 py-6 rounded-full">
+          <Button
+            size="lg"
+            className="text-lg px-10 py-7 rounded-full glass-card bg-primary hover:bg-primary/90 border-primary/20 hover:border-primary/40 text-primary-foreground shadow-lg hover:shadow-primary/25 group"
+            onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+          >
             Schedule Your Consultation
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
           </Button>
         </motion.div>
       </div>

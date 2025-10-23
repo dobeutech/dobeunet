@@ -86,15 +86,18 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className="sticky top-0 z-50 framer-blur bg-background/80 border-b border-border"
+      className="sticky top-0 z-50 glass-strong border-b border-border/30"
     >
       <div className="container-max section-padding">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2"
+            className="flex items-center space-x-3"
           >
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-cyan-400 flex items-center justify-center">
+              <span className="text-white font-bold text-lg">D</span>
+            </div>
             <span className="font-bold text-xl gradient-text">Dobeu Tech Solutions</span>
           </motion.div>
 
@@ -110,7 +113,7 @@ const Header = () => {
                   onClick={() => scrollToSection(item.id)}
                   variant="default"
                   size="sm"
-                  className="ml-2"
+                  className="ml-2 glass-card bg-primary hover:bg-primary/90 border-primary/20 hover:border-primary/40"
                   aria-label={item.ariaLabel}
                   aria-current={isActive ? 'page' : undefined}
                 >
@@ -123,10 +126,10 @@ const Header = () => {
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   className={cn(
-                    "relative px-4 py-2 text-sm font-medium transition-colors rounded-md",
-                    "hover:bg-accent hover:text-accent-foreground",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                    isActive ? "text-foreground" : "text-muted-foreground"
+                    "relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg",
+                    "hover:glass-subtle hover:text-foreground",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                    isActive ? "text-foreground glass-subtle" : "text-muted-foreground"
                   )}
                   aria-label={item.ariaLabel}
                   aria-current={isActive ? 'page' : undefined}
@@ -135,7 +138,7 @@ const Header = () => {
                   {isActive && (
                     <motion.div
                       layoutId="activeSection"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-primary"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-primary via-cyan-400 to-primary"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -151,7 +154,7 @@ const Header = () => {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                  <Button variant="ghost" className="relative h-10 w-10 rounded-full hover:glass-subtle transition-all duration-300">
                     <Avatar className="h-10 w-10">
                       <AvatarImage src={user.user_metadata?.avatar_url} alt={user.email} />
                       <AvatarFallback>
@@ -174,7 +177,7 @@ const Header = () => {
               </DropdownMenu>
             ) : (
               <Link to="/auth">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" className="glass-card border-border/50 hover:border-primary/30">
                   <User className="mr-2 h-4 w-4" />
                   Sign In
                 </Button>
@@ -185,7 +188,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="md:hidden hover:glass-subtle transition-all duration-300"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle mobile menu"
               aria-expanded={isMenuOpen}
@@ -204,13 +207,13 @@ const Header = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden"
+            className="md:hidden glass-subtle rounded-b-2xl"
             id="mobile-navigation"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation menu"
           >
-            <nav className="py-6 border-t border-border mt-4" aria-label="Mobile main navigation">
+            <nav className="py-6 border-t border-border/30 mt-4" aria-label="Mobile main navigation">
               <div className="flex flex-col space-y-2">
                 {navItems.map((item) => {
                   const isActive = activeSection === item.id;
@@ -222,7 +225,7 @@ const Header = () => {
                       onClick={() => scrollToSection(item.id)}
                       variant="default"
                       size="lg"
-                      className="w-full justify-start text-left"
+                      className="w-full justify-start text-left glass-card bg-primary hover:bg-primary/90"
                       aria-label={item.ariaLabel}
                       aria-current={isActive ? 'page' : undefined}
                     >
@@ -233,11 +236,11 @@ const Header = () => {
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
                       className={cn(
-                        "w-full text-left px-4 py-4 rounded-md transition-colors",
-                        "hover:bg-accent hover:text-accent-foreground",
-                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                        "w-full text-left px-4 py-4 rounded-lg transition-all duration-300",
+                        "hover:glass-subtle hover:text-foreground",
+                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                         "text-base font-medium",
-                        isActive ? "bg-accent text-accent-foreground" : "text-muted-foreground"
+                        isActive ? "glass-subtle text-foreground" : "text-muted-foreground"
                       )}
                       aria-label={item.ariaLabel}
                       aria-current={isActive ? 'page' : undefined}
@@ -249,7 +252,7 @@ const Header = () => {
               </div>
             </nav>
 
-            <div className="py-6 space-y-4 border-t border-border">
+            <div className="py-6 space-y-4 border-t border-border/30">
               <div className="flex items-center justify-between px-4">
                 <span className="text-sm font-medium">Theme</span>
                 <ThemeToggle />
@@ -257,7 +260,7 @@ const Header = () => {
 
               {user ? (
                 <div className="space-y-4 px-4">
-                  <div className="flex items-center gap-3 px-4 py-3 bg-accent/50 rounded-lg">
+                  <div className="flex items-center gap-3 px-4 py-3 glass-subtle rounded-xl">
                     <Avatar className="h-10 w-10">
                       <AvatarImage src={user.user_metadata?.avatar_url} alt={user.email || 'User avatar'} />
                       <AvatarFallback>
@@ -272,7 +275,7 @@ const Header = () => {
                   <Button
                     variant="outline"
                     onClick={handleSignOut}
-                    className="w-full h-12"
+                    className="w-full h-12 glass-card border-border/50 hover:border-primary/30"
                     aria-label="Sign out of your account"
                   >
                     <LogOut className="mr-2 h-4 w-4" />
@@ -284,7 +287,7 @@ const Header = () => {
                   <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
                     <Button
                       variant="outline"
-                      className="w-full h-12"
+                      className="w-full h-12 glass-card border-border/50 hover:border-primary/30"
                       aria-label="Sign in to your account"
                     >
                       <User className="mr-2 h-4 w-4" />

@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Award, MapPin, Calendar } from "lucide-react";
+import { GraduationCap, Award, MapPin, Calendar, Briefcase } from "lucide-react";
 
 const About = () => {
   const experience = [
@@ -42,7 +40,7 @@ const About = () => {
 
   const certifications = [
     "Six Sigma: Green Belt",
-    "Demonstrating Accountability as a Leader", 
+    "Demonstrating Accountability as a Leader",
     "Holding Your Team Accountable",
     "Java Certification Course",
     "Root Cause Analysis: Getting to the Root of Business Problems"
@@ -56,67 +54,96 @@ const About = () => {
     }
   ];
 
+  const skills = [
+    "Supply Chain", "Logistics", "Fleet Management", "Team Leadership",
+    "Python", "JavaScript", "AI/ML", "Database Design", "Linux",
+    "Graphic Design", "SEO", "Brand Strategy"
+  ];
+
   return (
-    <section id="about" className="py-24 bg-background">
-      <div className="container-max section-padding">
+    <section id="about" className="py-32 bg-gradient-to-b from-background via-accent/5 to-background relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-primary blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-cyan-400 blur-3xl" />
+      </div>
+
+      <div className="container-max section-padding relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
             About <span className="gradient-text">Dobeu Tech Solutions</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            15+ years of expertise in transportation, logistics, and supply chain management combined 
-            with cutting-edge technology consulting and innovative brand development. We specialize in 
-            freight optimization, KPIs, SOPs, custom software development, and strategic business solutions.
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            15+ years of expertise in transportation, logistics, and supply chain management combined
+            with cutting-edge technology consulting and innovative brand development.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          {/* Experience */}
+          {/* Experience Timeline */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-              <Calendar className="h-6 w-6 text-primary" />
-              Professional Experience
-            </h3>
-            
-            <div className="space-y-6">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-cyan-400 flex items-center justify-center">
+                <Briefcase className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-3xl font-bold text-foreground">
+                Professional Experience
+              </h3>
+            </div>
+
+            <div className="space-y-6 relative">
+              {/* Timeline line */}
+              <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-gradient-to-b from-primary via-cyan-400 to-primary opacity-20" />
+
               {experience.map((job, index) => (
-                <Card key={index} className="border-l-4 border-l-primary">
-                  <CardContent className="p-6">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative"
+                >
+                  {/* Timeline dot */}
+                  <div className="absolute left-4 top-8 w-4 h-4 rounded-full bg-gradient-to-br from-primary to-cyan-400 border-4 border-background z-10" />
+
+                  <div className="ml-12 glass-card rounded-2xl p-6 group hover:scale-[1.02] transition-all duration-300">
                     <div className="mb-4">
-                      <h4 className="text-lg font-semibold text-foreground">{job.role}</h4>
-                      <p className="text-primary font-medium">{job.company}</p>
-                      <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-2">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="h-3 w-3" />
+                      <h4 className="text-xl font-bold text-foreground mb-2">{job.role}</h4>
+                      <p className="text-primary font-semibold mb-3">{job.company}</p>
+                      <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1.5 glass-subtle px-3 py-1 rounded-full">
+                          <Calendar className="h-3.5 w-3.5 text-primary" />
                           {job.period}
                         </span>
-                        <span className="flex items-center gap-1">
-                          <MapPin className="h-3 w-3" />
+                        <span className="flex items-center gap-1.5 glass-subtle px-3 py-1 rounded-full">
+                          <MapPin className="h-3.5 w-3.5 text-primary" />
                           {job.location}
                         </span>
                       </div>
                     </div>
-                    
+
                     <ul className="space-y-2">
                       {job.highlights.map((highlight, idx) => (
-                        <li key={idx} className="text-sm text-muted-foreground">
-                          • {highlight}
+                        <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                          <span className="text-primary mt-1.5 flex-shrink-0">•</span>
+                          <span>{highlight}</span>
                         </li>
                       ))}
                     </ul>
-                  </CardContent>
-                </Card>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
@@ -127,47 +154,59 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-12"
           >
             {/* Education */}
             <div>
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <GraduationCap className="h-6 w-6 text-primary" />
-                Education
-              </h3>
-              
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
+                  <GraduationCap className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="text-3xl font-bold text-foreground">Education</h3>
+              </div>
+
               {education.map((edu, index) => (
-                <Card key={index} className="mb-4">
-                  <CardContent className="p-6">
-                    <h4 className="text-lg font-semibold text-foreground mb-2">{edu.degree}</h4>
-                    <p className="text-primary font-medium mb-2">{edu.institution}</p>
-                    <Badge variant="secondary">{edu.achievement}</Badge>
-                  </CardContent>
-                </Card>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="glass-card rounded-2xl p-6 group hover:scale-[1.02] transition-all duration-300"
+                >
+                  <h4 className="text-xl font-bold text-foreground mb-3">{edu.degree}</h4>
+                  <p className="text-primary font-semibold mb-4">{edu.institution}</p>
+                  <div className="inline-flex items-center gap-2 glass-subtle px-4 py-2 rounded-full">
+                    <Award className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium">{edu.achievement}</span>
+                  </div>
+                </motion.div>
               ))}
             </div>
 
             {/* Certifications */}
             <div>
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <Award className="h-6 w-6 text-primary" />
-                Certifications
-              </h3>
-              
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-primary flex items-center justify-center">
+                  <Award className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="text-3xl font-bold text-foreground">Certifications</h3>
+              </div>
+
               <div className="space-y-3">
                 {certifications.map((cert, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
                     viewport={{ once: true }}
+                    className="glass-card rounded-xl p-4 group hover:scale-[1.02] hover:border-primary/30 transition-all duration-300"
                   >
-                    <Card>
-                      <CardContent className="p-4">
-                        <p className="text-sm font-medium">{cert}</p>
-                      </CardContent>
-                    </Card>
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-gradient-to-r from-primary to-cyan-400" />
+                      <p className="text-sm font-medium text-foreground">{cert}</p>
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -175,16 +214,19 @@ const About = () => {
 
             {/* Skills Tags */}
             <div>
-              <h3 className="text-xl font-bold mb-4">Core Skills</h3>
+              <h3 className="text-2xl font-bold mb-6 text-foreground">Core Skills</h3>
               <div className="flex flex-wrap gap-2">
-                {[
-                  "Supply Chain", "Logistics", "Fleet Management", "Team Leadership", 
-                  "Python", "JavaScript", "AI/ML", "Database Design", "Linux", 
-                  "Graphic Design", "SEO", "Brand Strategy"
-                ].map((skill, index) => (
-                  <Badge key={index} variant="outline" className="text-xs">
+                {skills.map((skill, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.03 }}
+                    viewport={{ once: true }}
+                    className="glass-subtle px-4 py-2 rounded-full text-sm font-medium text-foreground hover:glass hover:scale-105 transition-all duration-300 cursor-default"
+                  >
                     {skill}
-                  </Badge>
+                  </motion.div>
                 ))}
               </div>
             </div>

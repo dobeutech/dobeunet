@@ -8,98 +8,119 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Framer-inspired color scheme */
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    /* Dobeu Brand Colors - Light Mode */
+    --background: 210 40% 98%;
+    --foreground: 215 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover-foreground: 215 25% 15%;
 
-    /* Digital Wharf brand colors */
-    --primary: 221 83% 53%; /* Modern blue */
-    --primary-foreground: 0 0% 98%;
+    /* Primary: Dobeu Blue from logo */
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220 8.9% 46.1%;
+    /* Secondary: Light cyan from logo layers */
+    --secondary: 187 71% 88%;
+    --secondary-foreground: 199 89% 28%;
 
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
+    /* Muted backgrounds for subtle sections */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 221 83% 53%;
-    --accent-foreground: 0 0% 98%;
+    /* Accent: Brighter cyan for highlights */
+    --accent: 187 71% 92%;
+    --accent-foreground: 199 89% 28%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 221 83% 53%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 199 89% 48%;
 
-    --radius: 0.75rem; /* More rounded like Framer */
+    --radius: 1rem;
 
-    /* Additional Framer-style colors */
-    --gradient-start: 221 83% 53%;
-    --gradient-end: 262 83% 58%;
-    --surface: 220 14.3% 95.9%;
-    --surface-foreground: 220 8.9% 46.1%;
+    /* Dobeu Glass Effect Variables */
+    --glass-bg: 0 0% 100%;
+    --glass-border: 199 89% 48%;
+    --glass-shadow: 199 89% 48%;
+
+    /* Gradient colors from logo */
+    --gradient-start: 199 89% 48%;
+    --gradient-mid: 193 82% 52%;
+    --gradient-end: 187 71% 58%;
+
+    --surface: 210 40% 98%;
+    --surface-foreground: 215 16% 47%;
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-foreground: 215 25% 26%;
+    --sidebar-primary: 199 89% 48%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 199 89% 28%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 199 89% 48%;
   }
 
   .dark {
-    /* Dark mode Framer-inspired colors */
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
+    /* Dobeu Brand Colors - Dark Mode */
+    --background: 215 35% 8%;
+    --foreground: 210 40% 92%;
 
-    --card: 224 71% 4%;
-    --card-foreground: 213 31% 91%;
+    --card: 215 32% 11%;
+    --card-foreground: 210 40% 92%;
 
-    --popover: 224 71% 4%;
-    --popover-foreground: 213 31% 91%;
+    --popover: 215 32% 11%;
+    --popover-foreground: 210 40% 92%;
 
-    --primary: 221 83% 53%;
-    --primary-foreground: 0 0% 98%;
+    /* Primary: Brighter Dobeu Blue for dark mode */
+    --primary: 199 89% 58%;
+    --primary-foreground: 215 35% 8%;
 
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 40% 98%;
+    /* Secondary: Darker blue-gray */
+    --secondary: 215 25% 18%;
+    --secondary-foreground: 187 71% 78%;
 
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
+    /* Muted backgrounds */
+    --muted: 215 25% 18%;
+    --muted-foreground: 217 14% 65%;
 
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 40% 98%;
+    /* Accent: Luminous cyan for dark mode */
+    --accent: 215 25% 18%;
+    --accent-foreground: 187 71% 78%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 45%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 221 83% 53%;
+    --border: 215 25% 22%;
+    --input: 215 25% 22%;
+    --ring: 199 89% 58%;
 
-    /* Dark mode specific colors */
-    --gradient-start: 221 83% 53%;
-    --gradient-end: 262 83% 58%;
-    --surface: 215 27.9% 16.9%;
-    --surface-foreground: 217.9 10.6% 64.9%;
+    /* Dobeu Glass Effect Variables - Dark Mode */
+    --glass-bg: 215 32% 11%;
+    --glass-border: 199 89% 58%;
+    --glass-shadow: 199 89% 58%;
 
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Gradient colors - brighter for dark mode */
+    --gradient-start: 199 89% 58%;
+    --gradient-mid: 193 82% 62%;
+    --gradient-end: 187 71% 68%;
+
+    --surface: 215 25% 18%;
+    --surface-foreground: 217 14% 65%;
+
+    --sidebar-background: 215 35% 8%;
+    --sidebar-foreground: 210 40% 92%;
+    --sidebar-primary: 199 89% 58%;
+    --sidebar-primary-foreground: 215 35% 8%;
+    --sidebar-accent: 215 25% 18%;
+    --sidebar-accent-foreground: 187 71% 78%;
+    --sidebar-border: 215 25% 22%;
+    --sidebar-ring: 199 89% 58%;
   }
 }
 
@@ -122,20 +143,90 @@ All colors MUST be HSL.
 }
 
 @layer components {
+  /* Dobeu Brand Gradients */
   .gradient-text {
-    background: linear-gradient(to right, hsl(var(--primary)), hsl(221 83% 53%));
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gradient-start)),
+      hsl(var(--gradient-mid)),
+      hsl(var(--gradient-end))
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .framer-blur {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+  .gradient-bg {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gradient-start)),
+      hsl(var(--gradient-mid)),
+      hsl(var(--gradient-end))
+    );
   }
 
-  .framer-glow {
-    box-shadow: 0 0 40px hsl(var(--primary) / 0.3);
+  /* Glassmorphism Effects */
+  .glass {
+    background: hsl(var(--glass-bg) / 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid hsl(var(--glass-border) / 0.1);
+    box-shadow:
+      0 8px 32px 0 hsl(var(--glass-shadow) / 0.1),
+      inset 0 1px 0 0 hsl(var(--glass-border) / 0.1);
+  }
+
+  .glass-strong {
+    background: hsl(var(--glass-bg) / 0.7);
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid hsl(var(--glass-border) / 0.15);
+    box-shadow:
+      0 12px 40px 0 hsl(var(--glass-shadow) / 0.15),
+      inset 0 1px 0 0 hsl(var(--glass-border) / 0.2);
+  }
+
+  .glass-subtle {
+    background: hsl(var(--glass-bg) / 0.2);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid hsl(var(--glass-border) / 0.08);
+    box-shadow:
+      0 4px 20px 0 hsl(var(--glass-shadow) / 0.08),
+      inset 0 1px 0 0 hsl(var(--glass-border) / 0.08);
+  }
+
+  .glass-card {
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid hsl(var(--border) / 0.5);
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 0 hsl(var(--glass-border) / 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card:hover {
+    background: hsl(var(--card) / 0.8);
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow:
+      0 12px 48px 0 hsl(var(--primary) / 0.12),
+      inset 0 1px 0 0 hsl(var(--primary) / 0.2);
+    transform: translateY(-4px);
+  }
+
+  .glass-glow {
+    box-shadow:
+      0 0 40px hsl(var(--primary) / 0.3),
+      0 0 80px hsl(var(--primary) / 0.15);
+  }
+
+  .glass-glow-strong {
+    box-shadow:
+      0 0 60px hsl(var(--primary) / 0.4),
+      0 0 120px hsl(var(--primary) / 0.2),
+      inset 0 0 40px hsl(var(--primary) / 0.05);
   }
 
   .section-padding {
