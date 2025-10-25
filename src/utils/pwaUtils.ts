@@ -7,16 +7,12 @@ export const registerServiceWorker = async () => {
         scope: '/'
       });
 
-      console.log('Service Worker registered successfully:', registration);
-
       registration.addEventListener('updatefound', () => {
         const newWorker = registration.installing;
 
         if (newWorker) {
           newWorker.addEventListener('statechange', () => {
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              console.log('New service worker available');
-
               if (confirm('A new version is available! Click OK to update.')) {
                 newWorker.postMessage({ type: 'SKIP_WAITING' });
                 window.location.reload();
@@ -42,13 +38,10 @@ export const setupPWAInstallPrompt = () => {
     e.preventDefault();
     deferredPrompt = e;
 
-    console.log('PWA install prompt ready');
-
     window.dispatchEvent(new Event('pwa-install-available'));
   });
 
   window.addEventListener('appinstalled', () => {
-    console.log('PWA installed successfully');
     deferredPrompt = null;
 
     window.dispatchEvent(new Event('pwa-installed'));
@@ -57,14 +50,12 @@ export const setupPWAInstallPrompt = () => {
 
 export const promptPWAInstall = async () => {
   if (!deferredPrompt) {
-    console.log('PWA install prompt not available');
     return false;
   }
 
   deferredPrompt.prompt();
 
   const { outcome } = await deferredPrompt.userChoice;
-  console.log(`User response to install prompt: ${outcome}`);
 
   deferredPrompt = null;
 

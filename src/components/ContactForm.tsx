@@ -1,31 +1,41 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Send, MessageSquare } from "lucide-react";
+import { contactFormSchema, type ContactFormData } from "@/lib/validations";
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
-  });
-  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: ""
+    }
+  });
 
+  const handleSubmit = async (data: ContactFormData) => {
     try {
       const { error } = await supabase
         .from('contact_submissions')
-        .insert([formData]);
+        .insert([data]);
 
       if (error) throw error;
 
@@ -34,21 +44,14 @@ const ContactForm = () => {
         description: "Thank you for your message. I'll respond within 24 hours.",
       });
 
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: ""
-      });
-    } catch (error: any) {
-      console.error('Contact form error:', error);
+      form.reset();
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Failed to send message. Please try again.";
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -87,67 +90,88 @@ const ContactForm = () => {
               </CardHeader>
               
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">Full Name *</label>
-                      <Input
-                        placeholder="Your full name"
-                        value={formData.name}
-                        onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                        required
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Full Name *</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Your full name" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Email Address *</FormLabel>
+                            <FormControl>
+                              <Input type="email" placeholder="your.email@example.com" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
                       />
                     </div>
-                    
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">Email Address *</label>
-                      <Input
-                        type="email"
-                        placeholder="your.email@example.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                        required
-                      />
+
+                    <FormField
+                      control={form.control}
+                      name="subject"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Subject</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Brief description of your inquiry" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Message *</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Tell me about your project, questions, or how I can help..."
+                              rows={6}
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full rounded-full"
+                      disabled={form.formState.isSubmitting}
+                    >
+                      {form.formState.isSubmitting ? "Sending..." : "Send Message"}
+                      <Send className="ml-2 h-4 w-4" />
+                    </Button>
+
+                    <div className="text-center">
+                      <p className="text-xs text-muted-foreground">
+                        <MessageSquare className="inline h-3 w-3 mr-1" />
+                        I'll respond to your message within 24 hours.
+                      </p>
                     </div>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium mb-2 block">Subject</label>
-                    <Input
-                      placeholder="Brief description of your inquiry"
-                      value={formData.subject}
-                      onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium mb-2 block">Message *</label>
-                    <Textarea
-                      placeholder="Tell me about your project, questions, or how I can help..."
-                      value={formData.message}
-                      onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                      rows={6}
-                      required
-                    />
-                  </div>
-
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="w-full rounded-full"
-                    disabled={isLoading || !formData.name || !formData.email || !formData.message}
-                  >
-                    {isLoading ? "Sending..." : "Send Message"}
-                    <Send className="ml-2 h-4 w-4" />
-                  </Button>
-
-                  <div className="text-center">
-                    <p className="text-xs text-muted-foreground">
-                      <MessageSquare className="inline h-3 w-3 mr-1" />
-                      I'll respond to your message within 24 hours.
-                    </p>
-                  </div>
-                </form>
+                  </form>
+                </Form>
               </CardContent>
             </Card>
           </motion.div>
